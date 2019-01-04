@@ -107,3 +107,22 @@ myMaskingFn(value: string): string {
     /*...*/
 }
 ```
+
+The `<input>`'s selection attributes (`selectionStart`, `selectionEnd` and
+`selectionDirection`) are computed by their previous values and the changes
+introduced in the value string by the masking function.
+
+##### How are selection attributes computed from masked and unmasked values?
+
+First the
+[longest common subsequence problem](https://en.wikipedia.org/wiki/Longest_common_subsequence_problem)
+is solved over both strings (including the traceback). The result is an edit
+list, which describe which edits (insertion, deletion) were necessary to go
+from the unmasked value to the masked one.
+
+Given the previous selection attributes and the edit list, the new selection
+attributes are computed.
+
+One should bear in mind that this process is not perfect, because usually there
+are more than one minimal edit list. Worse, the edit actions which best
+describe how to mask the input value may not be minimal at all.
