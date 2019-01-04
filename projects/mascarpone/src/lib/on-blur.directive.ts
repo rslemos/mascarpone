@@ -29,6 +29,9 @@ import { AbstractMaskingDirective } from './abstract-masking';
   host: {
     '(blur)': 'maskImmediately($event)',
   },
+  // tslint:disable-next-line:use-input-property-decorator
+  inputs: [ 'maskon: maskOnBlur', ],
 })
 export class OnBlurDirective extends AbstractMaskingDirective {
+  protected readonly _directiveName = 'maskOnBlur';
 }

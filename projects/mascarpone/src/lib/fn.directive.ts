@@ -1,8 +1,7 @@
 import { Directive } from '@angular/core';
 
 import { MASK } from './mask-fn';
-import { Mask } from './mask-fn';
-import { MaskFn } from './mask-fn';
+import { AbstractMaskFnCaller } from './abstract-masking';
 
 @Directive({
   selector: '[maskFn]',
@@ -12,19 +11,5 @@ import { MaskFn } from './mask-fn';
     {provide: MASK, useExisting: FnDirective, multi: false},
   ]
 })
-export class FnDirective implements Mask {
-  public maskFn: MaskFn;
-
-  mask(value: string, selectionStart: number, selectionEnd: number, selectionDirection: string): string | {
-    value: string,
-    selectionStart: number,
-    selectionEnd: number,
-    selectionDirection: string,
-  } {
-    if (this.maskFn) {
-      return this.maskFn(value, selectionStart, selectionEnd, selectionDirection);
-    }
-
-    throw new Error('either a masking function or a masking component should be provided');
-  }
+export class FnDirective extends AbstractMaskFnCaller {
 }

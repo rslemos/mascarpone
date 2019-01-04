@@ -3,15 +3,47 @@ import { Optional } from '@angular/core';
 
 import { MASK } from './mask-fn';
 import { Mask } from './mask-fn';
+import { MaskFn } from './mask-fn';
 import { makeFull } from './lcs';
 
-export abstract class AbstractMaskingDirective {
+export abstract class AbstractMaskFnCaller implements Mask {
+  public maskFn: MaskFn;
+
+  mask(value: string, selectionStart: number, selectionEnd: number, selectionDirection: string): string | {
+    value: string,
+    selectionStart: number,
+    selectionEnd: number,
+    selectionDirection: string,
+  } {
+    if (this.maskFn) {
+      return this.maskFn(value, selectionStart, selectionEnd, selectionDirection);
+    }
+
+    throw new Error('either a masking function or a masking component should be provided');
+  }
+}
+
+export abstract class AbstractMaskingDirective extends AbstractMaskFnCaller {
+  protected abstract readonly _directiveName: string;
+
+  public set maskon(maskfn: '' | MaskFn) {
+    if (maskfn === '') {
+      this.maskFn = null;
+      return;
+    }
+
+    if (this._mask !== this) {
+      throw new Error(`cannot set ${this._directiveName} with another masking component already set`);
+    }
+
+    this.maskFn = maskfn;
+  }
+
   constructor(
     @Optional() @Inject(MASK) private _mask: Mask
   ) {
-    if (!_mask) {
-      throw new Error('a masking component should be provided');
-    }
+    super();
+    this._mask = this._mask || this;
   }
 
   protected maskImmediately(event: UIEvent) {
