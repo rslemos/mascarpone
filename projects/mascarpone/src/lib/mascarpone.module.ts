@@ -23,6 +23,7 @@ import { ShadowDirective } from './shadow.directive';
     OnInputDirective,
     FnDirective,
     ShadowInputComponent,
+    ShadowDirective,
   ]
 })
 export class MascarponeModule { }
