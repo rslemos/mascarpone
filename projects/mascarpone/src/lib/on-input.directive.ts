@@ -10,9 +10,13 @@ import { debounce } from 'rxjs/operators';
 import { AbstractMaskingDirective } from './abstract-masking';
 
 @Directive({
-  selector: '[maskOnInput]'
+  selector: '[maskOnInput]',
+  // tslint:disable-next-line:use-input-property-decorator
+  inputs: [ 'maskon: maskOnInput', ],
 })
 export class OnInputDirective extends AbstractMaskingDirective implements OnInit {
+  protected readonly _directiveName = 'maskOnInput';
+
   private readonly changes = new Subject<UIEvent>();
 
   @Input() maskDelay = 500;
