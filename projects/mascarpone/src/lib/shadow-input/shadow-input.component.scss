@@ -1,0 +1,281 @@
+/***** inherit text properties *****/
+    :host :not([name="shadow"]) {
+        /* should not be overridden */
+        font: inherit !important;
+        color: inherit !important;
+        text-decoration: inherit !important;
+        text-emphasis: inherit !important;
+        text-indent: inherit !important;
+        text-overflow: inherit !important;
+        text-rendering: inherit !important;
+        text-shadow: inherit !important;
+        text-transform: inherit !important;
+        letter-spacing: inherit !important;
+        word-spacing: inherit !important;
+
+        color-adjust: inherit !important;
+        direction: inherit !important;
+        writing-mode: inherit !important;
+        text-align: inherit !important;
+    }
+
+    :host [name="shadow"] {
+        /* may be overridden */
+        font: inherit;
+        color: inherit; /* firefox only */
+        text-decoration: inherit;
+        text-emphasis: inherit;
+        text-indent: inherit;
+        text-overflow: inherit;
+        text-rendering: inherit;
+        text-shadow: inherit;
+        text-transform: inherit;
+        letter-spacing: inherit;
+        word-spacing: inherit;
+
+        color-adjust: inherit;
+        direction: inherit !important;
+        writing-mode: inherit !important;
+        text-align: inherit !important;
+    }
+/************************************/
+
+/******** clear pseudoclasses *******/
+/************************************/
+
+/********* align to baseline ********/
+
+    /* using flex */
+    :host,
+    :host > div {
+        display: inline-flex !important;
+        align-items: baseline !important;
+    }
+
+    //:host[data-alignment=right],
+    :host[data-alignment=right] > div {
+        flex-direction: row-reverse !important;
+    }
+
+    /* without flex */
+    /* `vertical-align: baseline` has issues with `overwrite: hidden` */
+    :host * {
+        display: inline-block !important;
+        vertical-align: baseline !important;
+    }
+/************************************/
+
+/*********** basic layout ***********/
+    :host {
+        white-space: nowrap !important;
+    }
+
+    :host * {
+        background: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        outline: none !important;
+
+        /* space collapsing et. al */
+        white-space: pre !important;
+
+        /* forbid properties that would screw the layout */
+        animation: unset !important; /* ??? */
+        transform: unset !important;
+        box-shadow: unset !important;
+        box-sizing: unset !important;
+        clip-path: unset !important;
+        filter: unset !important;
+        mask: unset !important;
+        min-width: unset !important;
+        max-width: unset !important;
+        min-height: unset !important;
+        max-height: unset !important;
+        mix-blend-mode: unset !important;
+        visibility: unset !important;
+
+        align-self: unset !important;
+        justify-self: unset !important;
+
+        overflow: unset !important;
+        position: static !important;
+    }
+
+    :host :not([name="shadow"]) {
+        opacity: 1 !important;
+    }
+
+    :host > * {
+        /* for flex aligned */
+        flex: 0 0 100% !important;
+        /* for no flex support */
+        width: 100% !important;
+
+        overflow: hidden !important;
+    }
+
+    :host > div {
+        position: relative !important;
+        left: -100% !important;
+    }
+
+    :host * {
+        height: 100% !important;
+    }
+
+    :host > div > [name="ghost"] {
+        visibility: hidden !important;
+    }
+/************************************/
+
+/********* pointer behavior *********/
+    :host * {
+        cursor: inherit !important;
+    }
+
+    :host > div {
+        pointer-events: none !important;
+    }
+/************************************/
+
+/******* forbidden properties *******/
+
+    /* masking undefined otherwise */
+    :host {
+        direction: ltr !important;
+        writing-mode: horizontal-tb !important;
+    }
+
+    :host:not([data-alignment=right]) {
+        text-align: left !important;
+    }
+
+    :host[data-alignment=right] {
+        text-align: right !important;
+    }
+
+    /* fixed properties for <input> */
+    :host {
+        overflow: unset !important;
+    }
+/************************************/
+
+/************* defaults *************/
+
+    /* defaults */
+    :host {
+        display: inline-block;
+        box-sizing: content-box;
+
+        /* defaults: native appearance */
+        /* it provides :focus styles, but they are useless */
+        /* since :host never get :focus (we'll define :focus-within later) */
+        -moz-appearance: textfield;
+        -webkit-appearance: textfield;
+        appearance: textfield;
+    }
+
+    /* defaults: Firefox */
+
+    /* resource://gre-resources/forms.css */
+
+    :host {
+        /* The sum of border and padding on block-start and block-end
+        must be the same here, for buttons, and for <select> (including its
+        internal padding magic) */
+        padding: 1px;
+    /*    border: 2px inset ThreeDLightShadow; */
+    /*    background-color: -moz-Field; */
+        color: -moz-FieldText;
+        font: -moz-field;
+        text-rendering: optimizeLegibility;
+        line-height: normal;
+        text-align: start;
+        text-transform: none;
+        word-spacing: normal;
+        letter-spacing: normal;
+        cursor: text;
+    //    -moz-binding: url("chrome://global/content/platformHTMLBindings.xml#inputFields");
+        text-indent: 0;
+        -moz-user-select: text;
+        text-shadow: none;
+        overflow-clip-box: padding-box content-box;
+
+        line-height: -moz-block-height;
+    }
+
+    :host [name="shadow"] {
+        word-wrap: normal !important;
+
+        /* Make the line-height equal to the available height */
+        line-height: -moz-block-height;
+
+        display: inline-block;
+        ime-mode: inherit;
+        resize: inherit;
+        -moz-control-character-visibility: visible;
+        overflow-clip-box: inherit;
+    }
+
+    :host [name="shadow"] {
+        /* resource://gre-resources/forms.css */
+        opacity: 0.54; /* firefox only */
+    }
+
+    /* defaults: by trial and error */
+    :host {
+        vertical-align: baseline;
+
+        /* the best we can do */
+        width: calc(20ch + 15px);
+
+        font-family: 'MS Shell Dlg', Arial;
+        font-size: 10pt;
+        font: -moz-field;
+        font: -webkit-field;
+
+        appearance: textfield;
+        -moz-appearance: textfield;
+        -webkit-appearance: textfield;
+        -ms-font-feature-settings: normal;
+
+        height: 1em;
+
+        padding: auto;
+    }
+
+    :host:focus-within {
+//        outline-offset: -2px;
+//        -moz-outline-radius: 3px;
+//        outline: auto 2px Highlight;
+        outline: auto 5px -webkit-focus-ring-color;
+        outline: auto 5px -moz-focus-ring-color;
+    }
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    /* defaults for Google Chrome by trial and error */
+    /* also does a good job for Chromium, Opera and Vivaldi */
+    :host {
+        /* Google Chrome 67.0.3396.99 (Official Build) (64-bit) */
+        background-color: white;
+        border: 0.1px solid rgb(238, 238, 238);
+        padding: 3px 2px;
+        width: 20ch;
+        height: initial;
+    }
+
+    :host [name="shadow"] {
+        opacity: 1;
+        /* by trial and error */
+        color: rgb(117, 117, 117);
+    }
+}
+
+/* IE10 and up */
+_:-ms-lang(x), :host {
+    background-color: white;
+    border: 1px solid rgb(112, 112, 112);
+    padding: 2px 1px;
+    width: calc(20ch + 8px);
+}
