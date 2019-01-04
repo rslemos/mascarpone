@@ -17,6 +17,7 @@ import { FnDirective } from './fn.directive';
     MascarponeComponent,
     OnBlurDirective,
     OnInputDirective,
+    FnDirective,
   ]
 })
 export class MascarponeModule { }
