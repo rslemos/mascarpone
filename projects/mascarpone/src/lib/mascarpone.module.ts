@@ -20,6 +20,7 @@ import { ShadowInputComponent } from './shadow-input/shadow-input.component';
     OnBlurDirective,
     OnInputDirective,
     FnDirective,
+    ShadowInputComponent,
   ]
 })
 export class MascarponeModule { }
