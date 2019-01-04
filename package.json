@@ -1,6 +1,8 @@
 {
   "name": "mascarpone-demo",
   "version": "0.0.0",
+  "license": "GPLv3",
+  "repository": "rslemos/mascarpone",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
