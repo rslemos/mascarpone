@@ -1,4 +1,5 @@
 import { Inject } from '@angular/core';
+import { Optional } from '@angular/core';
 
 import { SelectionDirection } from './mask-fn';
 import { MASK } from './mask-fn';
@@ -7,8 +8,11 @@ import { makeFull } from './lcs';
 
 export abstract class AbstractMaskingDirective {
   constructor(
-    @Inject(MASK) private _mask: Mask
+    @Optional() @Inject(MASK) private _mask: Mask
   ) {
+    if (!_mask) {
+      throw new Error('a masking component should be provided');
+    }
   }
 
   protected maskImmediately(event: UIEvent) {
