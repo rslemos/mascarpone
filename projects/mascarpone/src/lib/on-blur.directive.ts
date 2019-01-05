@@ -1,9 +1,6 @@
 import { Directive } from '@angular/core';
-import { Inject } from '@angular/core';
-import { HostListener } from '@angular/core';
 
-import { MASK } from './mask-fn';
-import { Mask } from './mask-fn';
+import { AbstractMaskingDirective } from './abstract-masking';
 
 /**
  * @description
@@ -27,32 +24,11 @@ import { Mask } from './mask-fn';
  * @publicApi
  */
 @Directive({
-  selector: '[maskOnBlur]'
+  selector: '[maskOnBlur]',
+  // tslint:disable-next-line:use-host-property-decorator
+  host: {
+    '(blur)': 'maskImmediately($event)',
+  },
 })
-export class OnBlurDirective {
-  constructor(
-    @Inject(MASK) private _mask: Mask
-  ) {
-  }
-
-  @HostListener('blur', ['$event'])
-  blur(event: UIEvent) {
-    const target = <HTMLInputElement>event.target;
-
-    // extract data
-    const {value} = target;
-
-    // apply masking
-    const result = this._mask.mask(value);
-
-    if (target.value === result) {
-      return;
-    }
-
-    // inject data
-    target.value = result;
-
-    // value/selection changed; redispatch event
-    target.dispatchEvent(event);
-  }
+export class OnBlurDirective extends AbstractMaskingDirective {
 }
