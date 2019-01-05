@@ -11,3 +11,37 @@ Input masking components for angular.
 $ npm install mascarpone
 ```
 
+## Usage
+
+### Masking input data
+
+#### Masking input on blur
+
+Applying `maskOnBlur` directive to an `<input>` component will trigger a
+masking function when the component loses focus. The `<input>` value will
+change to reflect the new masked value (whatever the function returns).
+
+```html
+<parent>
+    <input type="text" maskOnBlur>
+</parent>
+```
+
+The masking function should be provided elsewhere, by injection. For example,
+it could be provided in the current view component, via `providers` member of
+`@Component` decorator:
+
+```ts
+import { MASK } from 'mascarpone';
+import { Mask } from 'mascarpone';
+
+class MyCustomMask implements Mask {
+    public mask(value: string): string { /*...*/ }
+}
+
+@Component({
+    selector: 'parent',
+    providers: [{provide: MASK, useClass: MyCustomMask, multi: false},]
+})
+export class ParentComponent { /*...*/ }
+```
