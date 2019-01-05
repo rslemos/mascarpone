@@ -5,9 +5,10 @@ import { OnBlurDirective } from './on-blur.directive';
   imports: [
   ],
   declarations: [
-    OnBlurDirective
+    OnBlurDirective,
   ],
   exports: [
+    OnBlurDirective,
   ],
 })
 export class MascarponeModule { }
