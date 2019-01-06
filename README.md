@@ -110,10 +110,11 @@ Please note that the function's `this` should be bound externally:
 [example here]
 ```
 
-#### The masking function
 
-The masking function takes an string as input and spews this value, masked,
-as output:
+#### The masking function: simple
+
+The simplest masking function takes an string as input and spews this value,
+masked, as output:
 
 ```ts
 myMaskingFn(value: string): string {
@@ -124,3 +125,22 @@ myMaskingFn(value: string): string {
 The other selection attributes (`selectionStart`, `selectionEnd` and
 `selectionDirection`) are computed by their previous values and the changes
 introduced in the value string by the masking function.
+
+#### The masking function: advanced
+
+Sometimes the automatic guessing of selection attributes based on the changes
+made by a simple masking function may be less than perfect.
+
+A more perfect masking function can take this burden for itself and produce
+better results:
+
+```ts
+myMaskingFn(value: string, selectionStart: number, selectionEnd: number, selectionDirection: string): {
+  value: string,
+  selectionStart: number,
+  selectionEnd: number,
+  selectionDirection: string,
+} {
+    /*...*/
+}
+```
