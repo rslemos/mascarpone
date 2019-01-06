@@ -144,3 +144,32 @@ myMaskingFn(value: string, selectionStart: number, selectionEnd: number, selecti
     /*...*/
 }
 ```
+
+### Mask shadow
+
+```html
+<shadown-input maskShadow="shadow"></shadow-input>
+```
+
+#### Advanced mask shadow
+
+```html
+<parent>
+    <shadown-input></shadow-input>
+</parent>
+```
+
+```ts
+import { MASKSHADOW } from '@rslemos/mascarpone';
+import { MaskShadow } from '@rslemos/mascarpone';
+
+class MyCustomShadow implements MaskShadow {
+    public get maskshadow(): string { /*...*/ }
+}
+
+@Component({
+    selector: 'parent',
+    providers: [{provide: MASKSHADOW, useClass: MyCustomShadow, multi: false},]
+})
+export class ParentComponent { /*...*/ }
+```
