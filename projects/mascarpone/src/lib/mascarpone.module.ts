@@ -3,6 +3,7 @@ import { MascarponeComponent } from './mascarpone.component';
 import { OnBlurDirective } from './on-blur.directive';
 import { OnInputDirective } from './on-input.directive';
 import { FnDirective } from './fn.directive';
+import { ShadowInputComponent } from './shadow-input/shadow-input.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { FnDirective } from './fn.directive';
     OnBlurDirective,
     OnInputDirective,
     FnDirective,
+    ShadowInputComponent,
   ],
   exports: [
     MascarponeComponent,
