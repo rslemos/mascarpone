@@ -14,6 +14,7 @@ import { OnInputDirective } from './on-input.directive';
   exports: [
     FnDirective,
     OnBlurDirective,
+    OnInputDirective,
   ],
 })
 export class MascarponeModule { }

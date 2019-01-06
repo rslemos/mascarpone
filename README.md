@@ -54,6 +54,21 @@ If the masking function makes use of `this`, it should be bound externally:
     }
 ```
 
+#### Masking input on input
+
+Applying `maskOnInput` directive to an `<input>` component will trigger a
+masking function when the component's value changes. A grace period (by default
+500ms) will be given for the value to settle. If this delay is set to 0,
+the mask will be applied immediately. The `<input>` value will change to
+reflect the new masked value (whatever the function returns).
+
+```html
+<parent>
+    <input type="text" maskOnInput maskDelay="3000" [maskFn]="myMaskingFn">
+</parent>
+```
+
+
 #### Providing a masking function
 
 The `[maskFn]` is not the only way to provide a masking function. Is is also
