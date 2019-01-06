@@ -78,3 +78,34 @@ class MyCustomMask implements Mask {
 })
 export class ParentComponent { /*...*/ }
 ```
+
+#### Providing a masking function
+
+A masking function should be provided for injection into either masking
+directive.
+
+The examples above use `providers` member of the element's parent component.
+
+Another way to provide the masking function is by using the `maskFn` directive,
+which accepts any masking function.
+
+```html
+<parent>
+    <input type="text" maskOnInput maskFn="myMaskingFn">
+</parent>
+```
+
+```ts
+@Component({
+    selector: 'parent'
+})
+export class ParentComponent {
+    public myMaskingFn(value: string): string { /*...*/ }
+}
+```
+
+Please note that the function's `this` should be bound externally:
+
+```html
+[example here]
+```
