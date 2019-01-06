@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FnDirective } from './fn.directive';
 import { OnBlurDirective } from './on-blur.directive';
 import { OnInputDirective } from './on-input.directive';
+import { ShadowInputComponent } from './shadow-input/shadow-input.component';
 
 @NgModule({
   imports: [
@@ -10,6 +11,7 @@ import { OnInputDirective } from './on-input.directive';
     FnDirective,
     OnBlurDirective,
     OnInputDirective,
+    ShadowInputComponent,
   ],
   exports: [
     FnDirective,
