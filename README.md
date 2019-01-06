@@ -109,3 +109,18 @@ Please note that the function's `this` should be bound externally:
 ```html
 [example here]
 ```
+
+#### The masking function
+
+The masking function takes an string as input and spews this value, masked,
+as output:
+
+```ts
+myMaskingFn(value: string): string {
+    /*...*/
+}
+```
+
+The other selection attributes (`selectionStart`, `selectionEnd` and
+`selectionDirection`) are computed by their previous values and the changes
+introduced in the value string by the masking function.
