@@ -145,6 +145,22 @@ myMaskingFn(value: string, selectionStart: number, selectionEnd: number, selecti
 }
 ```
 
+#### Masking function from Delphi template
+
+Creating a masking function can be boring and error prone. Some developers are
+already used to create masks using a simple syntax, such as Embarcadero's
+Delphi development platform.
+
+This syntax can also be used through use of the `maskAsDelphi` directive:
+
+```html
+<input maskOnInput maskAsDelphi="000">
+```
+
+A simple masking function will be produced and injected. The selection
+attributes are implied by the changes made by the actual masking function.
+
+
 ### Mask shadow
 
 ```html
