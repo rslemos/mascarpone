@@ -160,6 +160,18 @@ This syntax can also be used through use of the `maskAsDelphi` directive:
 A simple masking function will be produced and injected. The selection
 attributes are implied by the changes made by the actual masking function.
 
+#### Masking function from MS Visual Basic template
+
+The Microsoft Visual Basic syntax for creating masks can also be used through
+use of the `maskAsVisualBasic` directive:
+
+```html
+<input maskOnInput maskAsVisualBasic="000">
+```
+
+A simple masking function will be produced and injected. The selection
+attributes are implied by the changes made by the actual masking function.
+
 
 ### Mask shadow
 
