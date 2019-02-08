@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
-import { OnBlurDirective } from './on-blur.directive';
 import { FnDirective } from './fn.directive';
+import { OnBlurDirective } from './on-blur.directive';
 
 @NgModule({
   imports: [
   ],
   declarations: [
-    OnBlurDirective,
     FnDirective,
+    OnBlurDirective,
   ],
   exports: [
+    FnDirective,
     OnBlurDirective,
   ],
 })
