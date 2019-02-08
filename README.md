@@ -97,10 +97,10 @@ export class ParentComponent { /*...*/ }
 ```
 
 
-#### The masking function
+#### The masking function: simple
 
-The masking function takes a string as input and spews this string, masked, as
-output:
+The simplest masking function takes a string as input and spews this string,
+masked, as output:
 
 ```ts
 myMaskingFn(value: string): string {
@@ -126,3 +126,23 @@ attributes are computed.
 One should bear in mind that this process is not perfect, because usually there
 are more than one minimal edit list. Worse, the edit actions which best
 describe how to mask the input value may not be minimal at all.
+
+
+#### The masking function: advanced
+
+Sometimes the automatic guessing of selection attributes based on the changes
+made by a simple masking function may be less than perfect.
+
+A more perfect masking function can take this burden for itself and produce
+better results:
+
+```ts
+myMaskingFn(value: string, selectionStart: number, selectionEnd: number, selectionDirection: SelectionDirection): {
+  value: string,
+  selectionStart: number,
+  selectionEnd: number,
+  selectionDirection: SelectionDirection,
+} {
+    /*...*/
+}
+```

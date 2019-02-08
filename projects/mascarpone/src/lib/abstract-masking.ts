@@ -22,8 +22,10 @@ export abstract class AbstractMaskingDirective {
         : null;
 
     // apply masking
-    const result0 = this._mask.mask(value);
-    const result = makeFull(value, result0, selectionStart, selectionEnd, selectionDirection0);
+    let result = this._mask.mask(value, selectionStart, selectionEnd, selectionDirection0);
+    if (typeof result === 'string') {
+      result = makeFull(value, result, selectionStart, selectionEnd, selectionDirection0);
+    }
 
     if (target.value === result.value &&
       target.selectionStart === result.selectionStart &&
