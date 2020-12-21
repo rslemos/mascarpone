@@ -40,7 +40,7 @@ export abstract class AbstractMaskingDirective extends AbstractMaskFnCaller {
   }
 
   constructor(
-    @Optional() @Inject(MASK) private _mask: Mask
+    @Optional() @Inject(MASK) private _mask: Mask | MaskFn
   ) {
     super();
     this._mask = this._mask || this;
@@ -53,7 +53,13 @@ export abstract class AbstractMaskingDirective extends AbstractMaskFnCaller {
     const {value, selectionStart, selectionEnd, selectionDirection} = target;
 
     // apply masking
-    let result = this._mask.mask(value, selectionStart, selectionEnd, selectionDirection);
+    let result;
+    if ((<Mask>this._mask).mask !== undefined) {
+      result = (<Mask>this._mask).mask(value, selectionStart, selectionEnd, selectionDirection);
+    } else {
+      result = (<MaskFn>this._mask)(value, selectionStart, selectionEnd, selectionDirection);
+    }
+
     if (typeof result === 'string') {
       result = makeFull(value, result, selectionStart, selectionEnd, selectionDirection);
     }
